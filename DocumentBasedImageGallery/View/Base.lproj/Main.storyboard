@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="ipad12_9rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Document Browser View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="DocumentBrowserViewController" customModule="DocumentBasedImageGallery" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="0fo-ii-Aj5"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="26" y="654"/>
+        </scene>
+        <!--Image Gallery-->
+        <scene sceneID="JBr-iX-JzL">
+            <objects>
+                <viewController title="Image Gallery" id="F23-LX-l0C" customClass="HomeViewController" customModule="ImageGallery" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="yFh-dU-YZX">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="1Eh-ny-XxD">
+                                <rect key="frame" x="0.0" y="74" width="1024" height="1272"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                                <collectionViewLayout key="collectionViewLayout" id="nre-rI-UsC" customClass="PinterestLayout" customModule="ImageGallery" customModuleProvider="target"/>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="imageCell" id="CjO-wM-LdU">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="lOy-jb-ivc">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                        <color key="backgroundColor" red="0.14340673340000001" green="0.14340673340000001" blue="0.14340673340000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="dropPlaceholderCell" id="aft-2P-10F">
+                                        <rect key="frame" x="61" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="GFJ-lo-Y8q">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="mbR-iX-Y9p">
+                                                    <rect key="frame" x="6.5" y="6.5" width="37" height="37"/>
+                                                    <color key="color" red="0.85490196939999996" green="0.37254902719999999" blue="0.30196079609999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                </activityIndicatorView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="mbR-iX-Y9p" firstAttribute="centerX" secondItem="GFJ-lo-Y8q" secondAttribute="centerX" id="7uO-Af-mWT"/>
+                                                <constraint firstItem="mbR-iX-Y9p" firstAttribute="centerY" secondItem="GFJ-lo-Y8q" secondAttribute="centerY" id="oVl-BQ-3jh"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="FzP-HF-IbM"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="1Eh-ny-XxD" firstAttribute="top" secondItem="FzP-HF-IbM" secondAttribute="top" id="9yM-vr-CWp"/>
+                            <constraint firstItem="FzP-HF-IbM" firstAttribute="trailing" secondItem="1Eh-ny-XxD" secondAttribute="trailing" id="EVf-pt-Zli"/>
+                            <constraint firstItem="FzP-HF-IbM" firstAttribute="bottom" secondItem="1Eh-ny-XxD" secondAttribute="bottom" id="JLs-ZM-HLp"/>
+                            <constraint firstItem="1Eh-ny-XxD" firstAttribute="leading" secondItem="FzP-HF-IbM" secondAttribute="leading" id="iNZ-a0-raS"/>
+                        </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="igO-Yz-eLu" appends="YES" id="OGX-hx-d9z"/>
+                        </connections>
+                    </view>
+                    <navigationItem key="navigationItem" title="Gallery Title" largeTitleDisplayMode="always" id="Mga-dg-0nA">
+                        <barButtonItem key="backBarButtonItem" title="Liberary" id="59m-GI-4KF"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="Ri0-NS-hQd">
+                            <connections>
+                                <action selector="didTapOpenButtonDocumentsButton:" destination="F23-LX-l0C" id="aRd-5w-uWD"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="ixH-Co-F3b">
+                            <connections>
+                                <action selector="didTapSaveButton:" destination="F23-LX-l0C" id="Z4a-ol-DRT"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="galleryCollectionView" destination="1Eh-ny-XxD" id="MS8-zg-por"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Cp4-i2-dj1" sceneMemberID="firstResponder"/>
+                <pinchGestureRecognizer id="igO-Yz-eLu">
+                    <connections>
+                        <action selector="didPinchCollectionView:" destination="F23-LX-l0C" id="oYW-bj-brz"/>
+                    </connections>
+                </pinchGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="1760.0292825768665" y="97.8515625"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="3vr-S2-N4u">
+            <objects>
+                <navigationController storyboardIdentifier="galleryNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="ELS-MV-0ih" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="WbR-Zq-w2r">
+                        <rect key="frame" x="0.0" y="24" width="1024" height="50"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="F23-LX-l0C" kind="relationship" relationship="rootViewController" id="dea-GW-F5R"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fpY-uF-9H8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1066.9106881405562" y="97.8515625"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

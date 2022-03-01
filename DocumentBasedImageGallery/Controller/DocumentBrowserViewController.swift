@@ -10,17 +10,30 @@ import UIKit
 
 class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocumentBrowserViewControllerDelegate {
     
+    //MARK: - Properties
+    var tempURL: URL?
+    
+    
+    //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        delegate = self
+        self.delegate = self
         
-        allowsDocumentCreation = true
-        allowsPickingMultipleItems = false
+        self.allowsDocumentCreation = false
+        self.allowsPickingMultipleItems = false
         
         // Update the style of the UIDocumentBrowserViewController
-        // browserUserInterfaceStyle = .dark
-        // view.tintColor = .white
+        self.browserUserInterfaceStyle = BrowserUserInterfaceStyle.init(rawValue: UInt(traitCollection.userInterfaceStyle.rawValue))!
+        self.view.tintColor = .label
+        
+        
+        //preparing the tempURL
+        self.tempURL = try? self.getDefaultDocumentPath()
+        if let tempURL = tempURL {
+            self.allowsDocumentCreation = FileManager.default.createFile(atPath: tempURL.path, contents: Data())
+        }
+        
         
         // Specify the allowed content types of your application via the Info.plist.
         
@@ -28,18 +41,16 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
     }
     
     
-    // MARK: UIDocumentBrowserViewControllerDelegate
+    //MARK: - Functions
+    private func getDefaultDocumentPath() throws -> URL? {
+        try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent("UntitledGallery.json")
+    }
+    
+    
+    // MARK: - UIDocumentBrowserViewControllerDelegate
     
     func documentBrowser(_ controller: UIDocumentBrowserViewController, didRequestDocumentCreationWithHandler importHandler: @escaping (URL?, UIDocumentBrowserViewController.ImportMode) -> Void) {
-        let newDocumentURL: URL? = nil
-        
-        // Set the URL for the new document here. Optionally, you can present a template chooser before calling the importHandler.
-        // Make sure the importHandler is always called, even if the user cancels the creation request.
-        if newDocumentURL != nil {
-            importHandler(newDocumentURL, .move)
-        } else {
-            importHandler(nil, .none)
-        }
+        importHandler(tempURL, .copy)
     }
     
     func documentBrowser(_ controller: UIDocumentBrowserViewController, didPickDocumentsAt documentURLs: [URL]) {
@@ -57,18 +68,30 @@ class DocumentBrowserViewController: UIDocumentBrowserViewController, UIDocument
     
     func documentBrowser(_ controller: UIDocumentBrowserViewController, failedToImportDocumentAt documentURL: URL, error: Error?) {
         // Make sure to handle the failed import appropriately, e.g., by presenting an error message to the user.
+        
+        let alert = UIAlertController(title: "Failed to Open", message: "Couldn't parse file.", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { _ in
+            alert.dismiss(animated: true)
+        }))
+         
+        self.present(alert, animated: true)
     }
     
-    // MARK: Document Presentation
+    
+    // MARK: - Document Presentation
     
     func presentDocument(at documentURL: URL) {
         
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-        let documentViewController = storyBoard.instantiateViewController(withIdentifier: "DocumentViewController") as! DocumentViewController
-        documentViewController.document = Document(fileURL: documentURL)
-        documentViewController.modalPresentationStyle = .fullScreen
+        let navController = storyBoard.instantiateViewController(withIdentifier: "galleryNavigationController")
+        navController.modalPresentationStyle = .fullScreen
         
-        present(documentViewController, animated: true, completion: nil)
+        if let homeVC = navController.contents as? HomeViewController {
+            homeVC.galleryDocument = GalleryDocument(fileURL: documentURL)
+        }
+        
+        present(navController, animated: true, completion: nil)
     }
 }
 
